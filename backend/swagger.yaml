@@ -4,7 +4,7 @@ info:
   description: API documentation for Auth and Tasks
   version: 1.0.0
 servers:
-  - url: http://localhost:5000/api/v1
+  - url: https://assignemnt-solution-1.onrender.com/api/v1
     description: Local development server
 components:
   securitySchemes:
@@ -181,3 +181,4 @@ paths:
       responses:
         "200":
           description: Task deleted
+
