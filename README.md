@@ -4,7 +4,7 @@ This project implements a scalable REST API using Node.js, Express, PostgreSQL (
 
 ## 🚀 Live Deployment Links
 - **Frontend Dashboard:** [https://assignemnt-solution.vercel.app]
-- **Backend API:** [[https://assignment-api-x9y2.onrender.com]
+- **Backend API:** [https://assignment-api-x9y2.onrender.com]
 - **Interactive API Docs (Swagger):**[https://assignemnt-solution-1.onrender.com/api-docs/#/]
 ---
 
@@ -153,4 +153,5 @@ docker-compose up -d
    ```bash
    npm run dev
    ```
+
 
