@@ -2,13 +2,13 @@
 
 This project implements a scalable REST API using Node.js, Express, PostgreSQL (via Supabase), and Prisma ORM, alongside a React frontend built with Vite and Tailwind CSS. It features secure JWT Authentication, Role-Based Access Control (RBAC), and full CRUD functionality for Tasks.
 
-## 🚀 Live Deployment Links
+##  Live Deployment Links
 - **Frontend Dashboard:** [https://assignemnt-solution.vercel.app]
 - **Backend API:** [https://assignemnt-solution-1.onrender.com/]
 - **Interactive API Docs (Swagger):**[https://assignemnt-solution-1.onrender.com/api-docs/#/]
 ---
 
-## 🏗️ Project Overview & Architecture
+##  Project Overview & Architecture
 ### Backend (Core Features)
 - **Authentication:** Secure Registration and Login with bcrypt password hashing and stateless JWT token handling.
 - **Role-Based Access Control (RBAC):** Users are assigned `user` or `admin` roles. Enforced on task CRUD operations—admins manage all tasks, users manage only their own.
@@ -29,7 +29,7 @@ The React application explicitly demonstrates:
 
 ---
 
-## 📈 Scalability Note (Required Deliverable)
+##  Scalability Note (Required Deliverable)
 This application is designed specifically with horizontal scaling in mind:
 - **Stateless Authentication:** Because JWT tokens are signed without storing sessions in server memory, any number of instances behind a load balancer can verify requests.
 - **Caching Layer Prepared:** A Redis container is wired up in the local `docker-compose.yml`. In a production microservice architecture, this Redis layer would handle rate-limiting and query caching before hitting the main Postgres nodes.
@@ -38,7 +38,7 @@ This application is designed specifically with horizontal scaling in mind:
 
 ---
 
-## ⚙️ Installation & Setup (Local Development)
+##  Installation & Setup (Local Development)
 
 ### 1. Environment Variables
 To run this locally, create a `.env` file in the `backend/` directory:
@@ -67,7 +67,7 @@ VITE_API_URL=http://localhost:5000/api/v1
 
 ---
 
-## 📡 API Endpoint List
+##  API Endpoint List
 *(Full interactive testing available at `/api-docs` via Swagger)*
 
 ### Auth Endpoints
@@ -153,6 +153,7 @@ docker-compose up -d
    ```bash
    npm run dev
    ```
+
 
 
 
