@@ -1,11 +1,88 @@
 # Scalable REST API with React Frontend
 
-This project implements a scalable REST API using Node.js, Express, PostgreSQL, and Prisma ORM, alongside a React frontend built with Vite and Tailwind CSS. It features secure JWT Authentication, Role-Based Access Control (RBAC), and full CRUD functionality for Tasks.
+This project implements a scalable REST API using Node.js, Express, PostgreSQL (via Supabase), and Prisma ORM, alongside a React frontend built with Vite and Tailwind CSS. It features secure JWT Authentication, Role-Based Access Control (RBAC), and full CRUD functionality for Tasks.
 
-## Tech Stack
-**Backend**: Node.js, Express.js, PostgreSQL, Prisma ORM, JWT, bcrypt, Zod, Swagger
-**Frontend**: React.js (Vite), Axios, React Router, Tailwind CSS, Lucide React
-**DevOps**: Docker, Docker Compose, Redis (Optional/Prepared)
+## 🚀 Live Deployment Links
+- **Frontend Dashboard:** [https://assignemnt-solution.vercel.app]
+- **Backend API:** [[https://assignment-api-x9y2.onrender.com]
+- **Interactive API Docs (Swagger):**[https://assignemnt-solution-1.onrender.com/api-docs/#/]
+---
+
+## 🏗️ Project Overview & Architecture
+### Backend (Core Features)
+- **Authentication:** Secure Registration and Login with bcrypt password hashing and stateless JWT token handling.
+- **Role-Based Access Control (RBAC):** Users are assigned `user` or `admin` roles. Enforced on task CRUD operations—admins manage all tasks, users manage only their own.
+- **RESTful Principles:** Strict route controller middleware service pattern with clear HTTP status codes (`200`, `201`, `400`, `401`, `403`, `404`, `500`).
+- **Validation:** Request bodies (register/login/task fields) are strictly validated using `Zod` prior to database execution.
+
+### Database (PostgreSQL via Supabase)
+The database schema utilizes a clear One-to-Many relational model handled via Prisma ORM:
+- **`User` Table:** Stores authentication data and roles.
+- **`Task` Table:** Stores CRUD entity data. Contains a `createdBy` foreign key relating directly to the `User` ID.
+
+### Frontend (UI Verification)
+The React application explicitly demonstrates:
+- User Registration & Login forms.
+- A Protected Dashboard guarded by JWT presence in localStorage.
+- Full UI capabilities for Creating, Reading, Updating, and Deleting tasks.
+- Immediate `react-hot-toast` visual feedback showing success/error messages directly parsed from the API response status codes.
+
+---
+
+## 📈 Scalability Note (Required Deliverable)
+This application is designed specifically with horizontal scaling in mind:
+- **Stateless Authentication:** Because JWT tokens are signed without storing sessions in server memory, any number of instances behind a load balancer can verify requests.
+- **Caching Layer Prepared:** A Redis container is wired up in the local `docker-compose.yml`. In a production microservice architecture, this Redis layer would handle rate-limiting and query caching before hitting the main Postgres nodes.
+- **Dockerization:** The backend is fully containerized, meaning it is Kubernetes/ECS ready.
+- **Separation of Concerns:** Future module additions (e.g., Notes, Products) can be slotted directly into new isolated Route/Controller/Validation files without interfering with existing business logic.
+
+---
+
+## ⚙️ Installation & Setup (Local Development)
+
+### 1. Environment Variables
+To run this locally, create a `.env` file in the `backend/` directory:
+```env
+PORT=5000
+DATABASE_URL="postgresql://user:password@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
+JWT_SECRET="super-secret-key-change-in-production"
+NODE_ENV="development"
+```
+
+And a `.env` file inside the `frontend/` directory:
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+```
+
+### 2. Backend Setup
+1. Open a terminal in the `backend` directory.
+2. Install dependencies: `npm install`
+3. Generate Prisma Client & Push Schema: `npm run build`
+4. Start the server: `npm run dev`
+
+### 3. Frontend Setup
+1. Open a terminal in the `frontend` directory.
+2. Install dependencies: `npm install`
+3. Start the dev server: `npm run dev`
+
+---
+
+## 📡 API Endpoint List
+*(Full interactive testing available at `/api-docs` via Swagger)*
+
+### Auth Endpoints
+- `POST /api/v1/auth/register` - Create user
+- `POST /api/v1/auth/login` - Authenticate & receive JWT
+
+### Task Endpoints (JWT Required)
+- `GET /api/v1/tasks` - List tasks
+- `POST /api/v1/tasks` - Create a new task
+- `GET /api/v1/tasks/:id` - Get specific task details
+- `PUT /api/v1/tasks/:id` - Modify task
+- `DELETE /api/v1/tasks/:id` - Delete task
+
+*Note: Admin Accounts can be created by sending `role: "admin"` during Registration either via Swagger or by modifying the React `Register.jsx` codebase temporarily.*
+
 
 ## Features
 - **Authentication**: Secure Registration and Login with bcrypt hashing and JWT.
@@ -77,5 +154,3 @@ docker-compose up -d
    npm run dev
    ```
 
-## Final Notes
-- Admin Accounts can be created by sending `role: "admin"` during Registration either via Swagger or by modifying the React `Register.jsx` codebase temporarily.
